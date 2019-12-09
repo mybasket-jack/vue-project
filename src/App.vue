@@ -4,11 +4,12 @@
       <router-link :to="{name: 'home'}">Home</router-link> |
       <router-link v-bind:to="{name: 'about'}">About</router-link>
     </div>
-		<transition-group name="router">
+		<router-view />
+		<!-- <transition-group name="router">
 			<router-view key="default"/>
     	<router-view key="email" name="email"/>
 			<router-view key="tel" name="tel"/>
-		</transition-group>
+		</transition-group> -->
 
   </div>
 </template>

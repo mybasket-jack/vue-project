@@ -2,19 +2,26 @@ const path = require('path')
 
 const resolve = dir => path.join(__dirname, dir)
 
-const BASE_URL = process.env.NODE_ENV === 'procution' ? '/iview-admin' : '/'
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/iview-admin' : '/'
 module.exports = {
   lintOnSave: false,
-  publicPath: BASE_URL,
+	publicPath: BASE_URL,
   chainWebpack: config => {
     config.resolve.alias
       .set('@', resolve('src'))
       .set('_c', resolve('src/components'))
   },
   // 打包时不生成.map文件
-  productionSourceMap: false,
+	productionSourceMap: false,
   devServer: {
-    proxy: 'http://localhost:4000'
+		port: 8081,
+		open: true, //自动打开浏览器
+    proxy: {
+			'/api':{
+				target: 'http://localhost:8080',
+				changeOrigin:true
+			}
+		}
   }
 
 }

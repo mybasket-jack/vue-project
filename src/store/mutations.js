@@ -9,6 +9,9 @@
 	},
 	SET_STATE_VALUE (state,val) {
 		state.stateValue = val
+	},
+	SET_LOGIN_RESULT (state,val) {
+		state.resultValue = val
 	}
  }
  export default mutations
