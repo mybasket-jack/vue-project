@@ -1,16 +1,17 @@
 <template>
   <div class="home">
-		<!-- <b>my favorite food is {{food}}</b>
+		<b>my favorite food is {{food}}</b>
 		<button @click="handClick('back')">返回上一个</button>
 		<button @click="handClick('push')">跳转到parent页</button>
-		<button @click="handClick('replace')">替换到parent页</button> -->
+		<button @click="handClick('replace')">替换到parent页</button>
+		<button @click="getInfo">请求数据</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-
+import axios from 'axios'
 export default {
   name: 'home',
   components: {
@@ -56,6 +57,11 @@ export default {
 				})
 			}
 		}
+	},
+	getInfo () {
+		axios.post('http://localhost:3000/getUserInfo',{userId: 22}).then(res => {
+			console.log(res)
+		})
 	}
 }
 </script>

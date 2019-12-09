@@ -1,8 +1,9 @@
 <template>
 	<div>
 		<!-- v-model 是一个语法糖 相当于 :value="inputValue" @input="handleInput" -->
-		<a-input v-model="inputValue"/>
-		<a-show :content="inputValue"/>
+		<a-input v-model="stateValue"/>
+		<p>{{ stateValue }}</p>
+		<!-- <a-show :content="inputValue"/> -->
 		<p>appName: {{ appName  }},
 			appNameWithVersion: {{ appNameWithVersion }},
 			</p>
@@ -41,19 +42,25 @@ export default {
 		...mapGetters([
 			'firstLetter'
 		]),
-		// userName () {
-		// 	return this.$store.state.user.userName
-		// }
 		...mapState({
 			userName: state => state.user.userName,
-			appVersion: state => state.appVersion,
-			todoList: state => state.user.todo ? state.user.todo.todoList : []
-		})
+			appVersion: state => state.appVeVrsion,
+			todoList: state => state.user.todo ? state.user.todo.todoList : [],
+		}),
+		stateValue: {
+			get () {
+				return this.$store.state.stateValue
+			},
+			set (value) {
+					this.SET_STATE_VALUE(value)
+			}
+		}
 	},
 	methods: {
 		...mapMutations ([
 			'SET_APP_NAME',
-			'SET_USER_NAME'
+			'SET_USER_NAME',
+			'SET_STATE_VALUE'
 		]),
 		...mapActions([
 			'updateAppName'
@@ -61,9 +68,9 @@ export default {
 		handleChangeAppName () {
 			// 提交的函数名称，新的值
 			//this.$store.commit('SET_APP_NAME','MyAppName'),
-			//this.SET_APP_NAME('jackson')
-			this.updateAppName('6666')
-			this.$store.commit('SET_APP_VERSION')
+			//this.SET_APP_NAME('jackson006')
+			this.updateAppName('')
+			//this.$store.commit('SET_APP_VERSION')
 		},
 		handleChangeUserName () {
 			this.SET_USER_NAME('你好')
@@ -78,6 +85,9 @@ export default {
 					]
 				}
 			})
+		},
+		handleStateValueChange (value) {
+			this.SET_STATE_VALUE(value)
 		}
 	}
 }

@@ -11,6 +11,7 @@ import saveInLocal from './plugin/saveInLocal'
 Vue.use(Vuex)
 // 创建vuex实例
 export default new Vuex.Store({
+	strict: process.env.NODE_ENV === 'development', // 生产环境打开严格模式，上线关闭
 	state,
 	getters,
   mutations,
@@ -18,5 +19,5 @@ export default new Vuex.Store({
   modules: {
 		user
 	},
-	plugins: [ saveInLocal ]
+	//plugins: [ saveInLocal ]
 })
