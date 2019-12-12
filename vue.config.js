@@ -2,7 +2,7 @@ const path = require('path')
 
 const resolve = dir => path.join(__dirname, dir)
 
-const BASE_URL = process.env.NODE_ENV === 'production' ? '/iview-admin' : '/'
+const BASE_URL = process.env.NODE_ENV !== 'development' ? '/iview-admin' : '/'
 module.exports = {
   lintOnSave: false,
 	publicPath: BASE_URL,
@@ -19,7 +19,10 @@ module.exports = {
     proxy: {
 			'/api':{
 				target: 'http://localhost:8080',
-				changeOrigin:true
+				changeOrigin:true,
+				pathRewrite: {
+					'^/api': ''
+			}
 			}
 		}
   }

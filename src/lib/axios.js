@@ -10,6 +10,8 @@ class HttpRequest {
 		const config = {
 			// 全局配置
 			baseUrl: this.baseUrl,
+			timeout: 10000, // 请求超时时间
+			transformRequest: data => qs.stringify(data),
 			headers: {
 				//
 			}

@@ -77,7 +77,7 @@ export default {
 		},
 		getInfo () {
 			getUserInfo().then(res => {
-				console.log('res: ',res)
+				this.SET_LOGIN_RESULT(res.data)
 			})
 		},
 		login () {

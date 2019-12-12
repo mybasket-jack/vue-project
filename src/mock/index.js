@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 import { getUserInfo } from './response/user'
 
-Mock.mock('/\/user/','get',getUserInfo)
+Mock.mock('/api/file/user',getUserInfo)
 
 export default Mock
