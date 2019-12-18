@@ -4,11 +4,12 @@
 		<button @click="handClick('back')">返回上一个</button>
 		<button @click="handClick('push')">跳转到parent页</button>
 		<button @click="handClick('replace')">替换到parent页</button>
-		<button @click="getInfo">请求数据</button>
+		<button @click="getInfo" :style="{background: bgColor}">请求数据</button>
 		<br>
 		<input v-model="inputValue"/>
 		<button @click="login">登录</button>
 		<p>结果：{{ resultValue }}</p>
+		<img :src="url">
   </div>
 </template>
 
@@ -30,7 +31,9 @@ export default {
 	},
 	data () {
 		return {
-			inputValue: ''
+			inputValue: '',
+			url: '',
+			bgColor
 		}
 	},
 	computed: {
@@ -78,11 +81,14 @@ export default {
 		getInfo () {
 			getUserInfo().then(res => {
 				this.SET_LOGIN_RESULT(res.data)
+				this.url = res.data.img
+				this.bgColor = res.data.bgColor
 			})
 		},
 		login () {
 			login({name: this.inputValue}).then(res => {
-					this.SET_LOGIN_RESULT(res.data.result)
+				this.SET_LOGIN_RESULT(res.data.result)
+
 			})
 		}
 	}

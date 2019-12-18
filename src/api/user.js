@@ -1,14 +1,14 @@
 import axios from './index'
 const getUserInfo = () => {
 	return axios.request({
-		url: '/api/file/user',
+		url: '/api/user',
 		method: 'get'
 	})
 }
 const login = ({ name}) => {
 	console.log('name: ',name)
 	return axios.request({
-		url: '/api/file/user/login',
+		url: '/api/user/login',
 		method: 'post',
 		data: {
 			name,

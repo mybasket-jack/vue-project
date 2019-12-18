@@ -73,6 +73,16 @@ const routes = [
 			component: () => import('@/views/store.vue')
 		},
 		{
+			path: '/split-pane',
+			name: 'split-pane',
+			component: () => import('@/views/split-pane.vue')
+		},
+		{
+			path: '/render_page',
+			name: 'render_page',
+			component: () => import('@/views/render_page.vue')
+		},
+		{
 			path: '*',
 			component: () => import('@/views/error_404.vue')
 		}
