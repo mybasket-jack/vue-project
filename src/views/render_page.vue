@@ -1,7 +1,9 @@
 <template>
 	<div>
-		<list :list="list"  :render="renderFunc"></list>
-		<count-to slot-scope="count" :end-val="count.number"></count-to>
+		<list :list="list"  :render="renderFunc">
+			<count-to slot-scope="count" :end-val="count.number"></count-to>
+		</list>
+
 	</div>
 </template>
 <script>
