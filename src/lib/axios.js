@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { baseURL } from '@/config'
-import { springgreen } from 'color-name'
+import { getToken } from "@/lib/util";
+import qs from 'qs'
 class HttpRequest {
 	constructor (baseUrl = baseURL) {
 		this.baseUrl = baseUrl //this要创建的实例
@@ -25,6 +26,7 @@ class HttpRequest {
 				// Spin.show()
 			}
 			this.queue[url] = true
+			config.headers['Authorization'] = getToken()
 			return config
 		}, error => {
 			return Promise.reject(error)

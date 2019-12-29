@@ -1,20 +1,17 @@
 import Home from '@/views/Home.vue'
+import Layout from '@/views/layout.vue'
 // 创建路由列表
 const routes = [
     {
         path: '/',
 				name: 'home',
-				alias: '/home_page',
-				component: Home,
-				props: route => ({
-					food: route.query.food
-				}),
-				// 路由独享守卫
-				beforeEnter:((to,form,next) =>{
-					// if(form.name === 'login') alert("这是从登录也来的")
-					// else alert('不知道从哪来的')
-					next()  //不能少
-				})
+				component: Layout,
+				children: [
+					{
+						path: '/home',
+						component: Home
+					}
+				]
 		},
 		{
 			path: '/login',
@@ -41,6 +38,18 @@ const routes = [
 			name: 'argu',
 			component: () => import('@/views/argu.vue'),
 			props: true
+		},
+		{
+			// 动态路由
+			path: '/table',
+			name: 'table',
+			component: Layout,
+			children: [
+				{
+					path: '/table',
+					component: () => import('@/views/table')
+				}
+			]
 		},
 		{
 			// 嵌套路由

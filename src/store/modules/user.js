@@ -1,3 +1,6 @@
+import { login, authorization} from '@/api/user'
+import { setToken } from "@/lib/util";
+
 const state = {
 	userName: 'jack'
 }
@@ -16,8 +19,36 @@ const actions = {
 		// rootState.appName
 		dispatch('XXX', '')
 	},
-	xxx () {
-		//
+	login ({commit},{userName, password}) {
+		return new Promise((resolve ,reject) => {
+			// 调用API的方法
+			login({userName, password }).then( res => {
+				if(res.data.code == 200 && res.data.token){
+					// 保存token
+					setToken(res.data.token)
+					resolve()
+				} else {
+					reject(new Error('登录错误'))
+				}
+			}).catch( error => {
+				reject(error)
+			})
+		})
+	},
+	async  authorization ({ commit },token) {
+		return new Promise((resolve, reject) => {
+			authorization().then(res => {
+				console.log("authorization: "+res)
+				if (parseInt(res.code) === 401){
+					reject(new Error("token error"))
+				}else{
+					resolve()
+				}
+			}).catch(error => {
+				reject(error)
+			})
+		})
+
 	}
 }
 export default  {

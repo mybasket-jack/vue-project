@@ -8,18 +8,7 @@ if(process.env.NODE_ENV === 'development')  require('./mock')
 Vue.config.productionTip = false
 Vue.prototype.$bus = Bus
 
-let list = [{name: 'jack1'},{name: 'jack3'}]
-const getEleArr = (h) => {
-	return list.map((item,index) => h('li',{
-		on: {
-			'click': event => {
-				console.log(event)
-				event.stopPropagation()
-			}
-		},
-		key: `list_item_${index}`
-	},item.name))
-}
+//
 new Vue({
   router,
   store,

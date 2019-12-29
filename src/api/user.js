@@ -1,20 +1,24 @@
 import axios from './index'
-const getUserInfo = () => {
+import qs from 'qs'
+export const getUserInfo = () => {
 	return axios.request({
-		url: '/api/user',
+		url: '/api/file/user',
 		method: 'get'
 	})
 }
-const login = ({ name}) => {
-	console.log('name: ',name)
+export const login = (param) => {
+	console.log(JSON.stringify(param))
 	return axios.request({
-		url: '/api/user/login',
+		url: '/api/file/user/login',
 		method: 'post',
-		data: {
-			name,
-			age: 23
-		}
+		data: qs.stringify({param: JSON.stringify(param)})
 	})
 }
-export { getUserInfo }
-export  { login}
+
+export const authorization = () => {
+	return axios.request({
+		url: '/api/file/user/authorization',
+		method: 'get'
+	})
+}
+

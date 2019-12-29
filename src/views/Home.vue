@@ -1,15 +1,32 @@
 <template>
   <div class="home">
-		<b>my favorite food is {{food}}</b>
-		<button @click="handClick('back')">返回上一个</button>
-		<button @click="handClick('push')">跳转到parent页</button>
-		<button @click="handClick('replace')">替换到parent页</button>
-		<button @click="getInfo" :style="{background: bgColor}">请求数据</button>
-		<br>
-		<input v-model="inputValue"/>
-		<button @click="login">登录</button>
-		<p>结果：{{ resultValue }}</p>
-		<img :src="url">
+<!--		<button @click="handClick('back')">返回上一个</button>-->
+<!--		<button @click="handClick('push')">跳转到parent页</button>-->
+<!--		<button @click="handClick('replace')">替换到parent页</button>-->
+<!--		<button @click="getInfo" :style="{background: bgColor}">请求数据</button>-->
+<!--		<br>-->
+<!--		<input v-model="inputValue"/>-->
+<!--		<button @click="login">登录</button>-->
+<!--		<p>结果：{{ resultValue }}</p>-->
+<!--		<img :src="url">-->
+		<Row>
+			<i-col>layout 学习</i-col>
+		</Row>
+		<Row :gutter="10">
+			<i-col span="12"></i-col>
+			<i-col span="12"></i-col>
+		</Row>
+		<Row :gutter="10">
+			<i-col span="8"></i-col>
+			<i-col span="8"></i-col>
+			<i-col span="8"></i-col>
+		</Row>
+		<Row :gutter="10" class="blue">
+			<i-col :sm="12" :md="6" :lg="8"></i-col>
+			<i-col :sm="12" :md="6" :lg="8"></i-col>
+			<i-col :sm="12" :md="6" :lg="8"></i-col>
+			<i-col :sm="12" :md="6" :lg="8"></i-col>
+		</Row>
   </div>
 </template>
 
@@ -33,7 +50,7 @@ export default {
 		return {
 			inputValue: '',
 			url: '',
-			bgColor
+			bgColor:'',
 		}
 	},
 	computed: {
@@ -86,12 +103,27 @@ export default {
 			})
 		},
 		login () {
-			login({name: this.inputValue}).then(res => {
+			login({name: this.inputValue,password:'jack'}).then(res => {
 				this.SET_LOGIN_RESULT(res.data.result)
-
 			})
 		}
 	}
 
 }
 </script>
+<style lang="less">
+	.home{
+		.ivu-col{
+			height: 50px;
+			background: pink;
+			background-clip: content-box;
+			margin-top: 10px;
+		}
+	}
+	.blue{
+		.ivu-col{
+			background: #42b983;
+			background-clip: content-box;
+		}
+	}
+</style>

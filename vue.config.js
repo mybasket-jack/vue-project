@@ -9,16 +9,26 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias
       .set('@', resolve('src'))
-      .set('_c', resolve('src/components'))
+      .set('_c', resolve('src/components')),
+		config.module
+			.rule('vue')
+			.use('iview')
+			.loader('iview-loader')
+			.options({prefix: false})
   },
   // 打包时不生成.map文件
 	productionSourceMap: false,
   devServer: {
 		port: 8081,
 		open: true, //自动打开浏览器
+		disableHostCheck: true,
+		hotOnly: false,
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+		},
     proxy: {
 			'/api':{
-				target: 'http://localhost:8080',
+				target: 'http://localhost:8090',
 				changeOrigin:true,
 				ws: true,
 				pathRewrite: {
