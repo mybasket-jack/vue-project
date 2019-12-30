@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './router'
-import store from "@/views/store";
+import store from "@/store";
 import { setTitle, setToken, getToken} from '@/lib/util'
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
@@ -13,34 +13,26 @@ const router = new VueRouter({
   routes
 })
 
-//const HAS_LOGIN = true
 // 前置守卫
 router.beforeEach((to,from,next) => {
 	to.meta  && setTitle(to.meta.title)
-	// if(to.name !== 'login'){
-	// 	if(HAS_LOGIN) next()
-	// 	else next({name: 'login'})
-	// }else {
-	// 	if (HAS_LOGIN) next({name: 'home'})
-	// 	else next()
-	// }
-	next()
-	// 获取token 判断是否登录
-	// const token = getToken()
-	// if(token){
-	// 	// 判断是否有效
-	// 	store.dispatch('authorization',token).then(() => {
-	// 		if (to.name === 'login') next({ name: 'home' })
-	// 		else next()
-	// 	}).catch(() => {
-	// 		// token 情况
-	// 		setToken('')
-	// 		next({ name: 'login' })
-	// 	})
-	// } else {
-	// 	if(to.name === 'login' ) next()
-	// 	else next({name: 'login'})
-	// }
+
+	//获取token 判断是否登录
+	const token = getToken()
+	if(token){
+		// 判断是否有效
+		store.dispatch('authorization',token).then(() => {
+			if (to.name === 'login') next({ name: 'home' })
+			else next()
+		}).catch(() => {
+			// token 情况
+			setToken('')
+			next({ name: 'login' })
+		})
+	} else {
+		if(to.name === 'login' ) next()
+		else next({name: 'login'})
+	}
 })
 // 导航被确认之前
 //router.beforeResolve()

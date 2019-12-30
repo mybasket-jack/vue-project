@@ -40,14 +40,26 @@ const routes = [
 			props: true
 		},
 		{
-			// 动态路由
-			path: '/table',
+			// 可编辑表格
+			path: '/',
 			name: 'table',
 			component: Layout,
 			children: [
 				{
-					path: '/table',
+					path: 'table',
 					component: () => import('@/views/table')
+				}
+			]
+		},
+		{
+			// 可编辑表格
+			path: '/',
+			name: 'tree',
+			component: Layout,
+			children: [
+				{
+					path: 'folder-tree',
+					component: () => import('@/views/folder-tree/folder-tree.vue')
 				}
 			]
 		},

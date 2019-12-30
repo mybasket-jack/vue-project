@@ -17,13 +17,13 @@ const mutations = {
 const actions = {
 	updateUserName ({ commit, state, rootState, dispatch}) {
 		// rootState.appName
-		dispatch('XXX', '')
+		//dispatch('XXX', '')
 	},
-	login ({commit},{userName, password}) {
+	login ({ commit },{ userName, password }) {
 		return new Promise((resolve ,reject) => {
 			// 调用API的方法
 			login({userName, password }).then( res => {
-				if(res.data.code == 200 && res.data.token){
+				if(res.code == 200 && res.data.token){
 					// 保存token
 					setToken(res.data.token)
 					resolve()
@@ -35,10 +35,9 @@ const actions = {
 			})
 		})
 	},
-	async  authorization ({ commit },token) {
+	authorization ({ commit },token) {
 		return new Promise((resolve, reject) => {
 			authorization().then(res => {
-				console.log("authorization: "+res)
 				if (parseInt(res.code) === 401){
 					reject(new Error("token error"))
 				}else{
@@ -56,5 +55,8 @@ export default  {
 	state,
 	getters,
 	mutations,
-	actions
+	actions,
+	modules: {
+
+	}
 }

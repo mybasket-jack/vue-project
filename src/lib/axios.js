@@ -11,11 +11,16 @@ class HttpRequest {
 		const config = {
 			// 全局配置
 			baseUrl: this.baseUrl,
-			timeout: 10000, // 请求超时时间
-			transformRequest: data => qs.stringify(data),
 			headers: {
 				//
 			}
+		}
+		return config
+	}
+	destory (url) {
+		delete  this.queue[url]
+		if(!Object.keys(this.queue).length){
+			// Spin.hide()
 		}
 	}
 	interceptors (instance, url) {
@@ -33,12 +38,12 @@ class HttpRequest {
 		})
 		//响应拦截器
 		instance.interceptors.response.use(res => {
-			delete this.queue[url]
+			this.destory(url)
 			// 取res的data和status
-			const { data, status } = res
-			return { data, status }
+			const { data } = res
+			return data
 		}, error => {
-			delete this.queue[url]
+			this.destory(url)
 			return Promise.reject(error)
 		})
 	}

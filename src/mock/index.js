@@ -1,10 +1,12 @@
 import Mock from 'mockjs'
 import { getUserInfo } from './response/user'
-import { getTableData } from './response/data'
+import { getTableData, getFolderList, getFileList } from './response/data'
 const Random = Mock.Random
 
 Mock.mock('/api/user',getUserInfo)
 Mock.mock('/getTableData',getTableData)
+Mock.mock('/getFolderList',getFolderList)
+Mock.mock('/getFileList',getFileList)
 Mock.setup({
 	timeout: 0
 })

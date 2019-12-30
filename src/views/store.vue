@@ -44,7 +44,7 @@ export default {
 		]),
 		...mapState({
 			userName: state => state.user.userName,
-			appVersion: state => state.appVeVrsion,
+			appVersion: state => state.appVersion,
 			todoList: state => state.user.todo ? state.user.todo.todoList : [],
 		}),
 		stateValue: {
