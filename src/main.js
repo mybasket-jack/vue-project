@@ -3,6 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'  //引入vuex
 import Bus from './lib/bus'
+import ViewUI from 'view-design';
+import 'view-design/dist/styles/iview.css';
+
+Vue.use(ViewUI);
+
 import CountTo from '_c/count-to'
 if(process.env.NODE_ENV === 'development')  require('./mock')
 Vue.config.productionTip = false

@@ -8,7 +8,7 @@ const routes = [
 				component: Layout,
 				children: [
 					{
-						path: '/home',
+						path: 'home',
 						component: Home
 					}
 				]
@@ -53,12 +53,12 @@ const routes = [
 		},
 		{
 			// 可编辑表格
-			path: '/',
+			path: '/tree',
 			name: 'tree',
 			component: Layout,
 			children: [
 				{
-					path: 'folder-tree',
+					path: '/folder-tree',
 					component: () => import('@/views/folder-tree/folder-tree.vue')
 				}
 			]

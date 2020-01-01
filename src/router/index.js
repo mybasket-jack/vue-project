@@ -3,11 +3,8 @@ import VueRouter from 'vue-router'
 import routes from './router'
 import store from "@/store";
 import { setTitle, setToken, getToken} from '@/lib/util'
-import ViewUI from 'view-design';
-import 'view-design/dist/styles/iview.css';
-Vue.use(VueRouter)
-Vue.use(ViewUI);
 
+Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes

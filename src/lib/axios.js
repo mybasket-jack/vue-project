@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { baseURL } from '@/config'
 import { getToken } from "@/lib/util";
-import qs from 'qs'
 class HttpRequest {
+	// 判断开发环境还是生产环境
 	constructor (baseUrl = baseURL) {
 		this.baseUrl = baseUrl //this要创建的实例
 		this.queue = {}

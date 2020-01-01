@@ -7,7 +7,6 @@ export const getUserInfo = () => {
 	})
 }
 export const login = (param) => {
-	console.log(JSON.stringify(param))
 	return axios.request({
 		url: '/api/file/user/login',
 		method: 'post',

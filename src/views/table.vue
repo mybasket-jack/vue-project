@@ -30,7 +30,8 @@
 		},
 		mounted () {
 			getTableData().then( res => {
-				this.tableData = res.data;
+				console.log(res);
+				this.tableData = res;
 			})
 		}
 	}
