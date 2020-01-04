@@ -1,7 +1,7 @@
 <template>
 	<div class="layout-wrapper">
 		<Layout class="layout-outer">
-			<Sider  breakpoint="sm" hide-trigger collapsible  v-model="isCollapsed"></Sider>
+			<Sider  breakpoint="sm"  hide-trigger collapsible  v-model="isCollapsed"></Sider>
 			<Layout>
 				<Header class="header-wrapper">
 					<Icon :class="triggerClasses" @click.native="handleCollapsed" type="md-menu" :size="32"/>

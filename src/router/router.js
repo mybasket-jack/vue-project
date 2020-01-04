@@ -1,7 +1,7 @@
 import Home from '@/views/Home.vue'
 import Layout from '@/views/layout.vue'
 // 创建路由列表
-const routes = [
+export const routeMap = [
     {
         path: '/',
 				name: 'home',
@@ -9,14 +9,10 @@ const routes = [
 				children: [
 					{
 						path: 'home',
+						name: 'home_index',
 						component: Home
 					}
 				]
-		},
-		{
-			path: '/login',
-			name: 'login',
-			component: () => import('@/views/login.vue')
 		},
     {
         path: '/about',
@@ -41,12 +37,13 @@ const routes = [
 		},
 		{
 			// 可编辑表格
-			path: '/',
+			path: '/table',
 			name: 'table',
 			component: Layout,
 			children: [
 				{
-					path: 'table',
+					path: 'table_page',
+					name: 'table_page',
 					component: () => import('@/views/table')
 				}
 			]
@@ -59,7 +56,21 @@ const routes = [
 			children: [
 				{
 					path: '/folder-tree',
+					name: 'folder-tree',
 					component: () => import('@/views/folder-tree/folder-tree.vue')
+				}
+			]
+		},
+		{
+			// 可编辑表格
+			path: '/form',
+			name: 'form',
+			component: Layout,
+			children: [
+				{
+					path: '/form_page',
+					name: 'form_page',
+					component: () => import('@/views/form.vue')
 				}
 			]
 		},
@@ -79,6 +90,7 @@ const routes = [
 		{
 			// 命名视图
 			path: '/name_view',
+			name: 'name_view',
 			components: {
 				default: () => import('@/views/Home.vue'),
 				email: () => import('@/views/email.vue'),
@@ -87,10 +99,12 @@ const routes = [
 		},
 		{
 			path: '/main',
+			name: 'main',
 			redirect: to => '/'
 		},
 		{
 			path: '/store',
+			name: 'store',
 			component: () => import('@/views/store.vue')
 		},
 		{
@@ -107,10 +121,16 @@ const routes = [
 		path: '/menu_page',
 		name: 'menu_page',
 		component: () => import('@/views/menu_page.vue')
-	},
-		{
-			path: '*',
-			component: () => import('@/views/error_404.vue')
-		}
+	}
 ]
-export default  routes
+export const  routes = [
+	{
+		path: '/login',
+		name: 'login',
+		component: () => import('@/views/login.vue')
+	},
+	{
+		path: '*',
+		component: () => import('@/views/error_404.vue')
+	}
+]

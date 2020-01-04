@@ -1,42 +1,68 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import routes from './router'
+import { routes } from './router'
 import store from "@/store";
 import { setTitle, setToken, getToken} from '@/lib/util'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   routes
-})
+});
 
 // 前置守卫
 router.beforeEach((to,from,next) => {
-	to.meta  && setTitle(to.meta.title)
+	to.meta  && setTitle(to.meta.title);
 
 	//获取token 判断是否登录
-	const token = getToken()
+	/*const token = getToken();
 	if(token){
 		// 判断是否有效
 		store.dispatch('authorization',token).then(() => {
-			if (to.name === 'login') next({ name: 'home' })
+			if (to.name === 'login') next({ name: 'home' });
 			else next()
 		}).catch(() => {
 			// token 情况
-			setToken('')
+			setToken('');
 			next({ name: 'login' })
 		})
 	} else {
-		if(to.name === 'login' ) next()
+		if(to.name === 'login' ) next();
+		else next({name: 'login'})
+	}*/
+
+	// 权限判断
+	const token = getToken();
+	if (token) {
+		if(!store.state.router.hasGetRules){
+			// 没有获取过路由列表
+			store.dispatch("authorization").then( rules => {
+				store.dispatch('concatRouters',rules).then(routers => {
+					// 这里routes 不使用深拷贝，会导致嵌套路由的一级组件不能复用
+					// 建议不使用深拷贝，把vuex的严格模式设为false
+					router.addRoutes(routers); //动态添加路由
+					// 确保addRoutes已完成,路由列表加载完,
+					// set the replace: true so the navigation will not leave a history record
+					next({...to, replace: true})
+				}).catch(() => {
+					next({name: 'login'})
+				});
+			})
+		} else{
+			// 获取过路由列表
+			next()
+		}
+	} else {
+		if (to.name === 'login') next();
 		else next({name: 'login'})
 	}
-})
+});
 // 导航被确认之前
 //router.beforeResolve()
 // 后置钩子
 router.afterEach((to,form,next) => {
 	//loging = false
-})
+});
 
 /**
  * 导航解析流程

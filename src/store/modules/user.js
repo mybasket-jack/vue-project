@@ -2,8 +2,9 @@ import { login, authorization} from '@/api/user'
 import { setToken } from "@/lib/util";
 
 const state = {
-	userName: 'jack'
-}
+	userName: 'jack',
+	componentRules: ''
+};
 const getters = {
 	firstLetter: (state) => {
 		return state.userName.substr(0,1)
@@ -11,9 +12,12 @@ const getters = {
 }
 const mutations = {
 	SET_USER_NAME (state,params) {
-		state.userName = params
+		state.userName = params;
+	},
+	SET_COMPONENT_RULES (state, rules) {
+		state.componentRules = rules;
 	}
-}
+};
 const actions = {
 	updateUserName ({ commit, state, rootState, dispatch}) {
 		// rootState.appName
@@ -41,13 +45,16 @@ const actions = {
 				if (parseInt(res.code) === 401){
 					reject(new Error("token error"))
 				}else{
-					resolve()
+					setToken(res.data.token);
+					// 将页面权限传到route
+					resolve(res.data.rules.page);
+					// 触发组件权限控制方法
+					commit('SET_COMPONENT_RULES',res.data.rules.component);
 				}
 			}).catch(error => {
 				reject(error)
 			})
 		})
-
 	}
 }
 export default  {

@@ -13,7 +13,7 @@
 			<i-col>layout 学习</i-col>
 		</Row>
 		<Row :gutter="10">
-			<i-col span="12"></i-col>
+			<i-col span="12">{{ componentRules }}</i-col>
 			<i-col span="12"></i-col>
 		</Row>
 		<Row :gutter="10">
@@ -27,6 +27,8 @@
 			<i-col :sm="12" :md="6" :lg="8"></i-col>
 			<i-col :sm="12" :md="6" :lg="8"></i-col>
 		</Row>
+		<Button v-if="componentRules.edit_button">编辑</Button>
+		<Button v-if="componentRules.publish_button">发布</Button>
   </div>
 </template>
 
@@ -56,6 +58,7 @@ export default {
 	computed: {
 		...mapState({
 			resultValue: state => state.resultValue,
+			componentRules: state => state.user.componentRules
 		}),
 	},
 	beforeRouteEnter (to,form,next){

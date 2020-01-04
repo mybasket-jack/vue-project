@@ -50,8 +50,5 @@ export const getUserInfo = (options) => {
 	}
 	return Mock.mock(template)
 }
-// export const getUserInfo = (options) => {
-// 	return {
-// 		name: 'ok'
-// 	}
-// }
+
+
