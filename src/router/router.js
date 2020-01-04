@@ -49,7 +49,7 @@ export const routeMap = [
 			]
 		},
 		{
-			// 可编辑表格
+			// 树组件
 			path: '/tree',
 			name: 'tree',
 			component: Layout,
@@ -58,6 +58,19 @@ export const routeMap = [
 					path: '/folder-tree',
 					name: 'folder-tree',
 					component: () => import('@/views/folder-tree/folder-tree.vue')
+				}
+			]
+		},
+		{
+			// 自定义icon
+			path: '/icon',
+			name: 'icon',
+			component: Layout,
+			children: [
+				{
+					path: '/icon_page',
+					name: 'icon_page',
+					component: () => import('@/views/icon_page.vue')
 				}
 			]
 		},

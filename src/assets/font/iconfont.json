@@ -1,0 +1,100 @@
+{
+  "id": "1597099",
+  "name": "vue-project",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "8776631",
+      "name": "view",
+      "font_class": "icon-test",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "8776676",
+      "name": "view_off",
+      "font_class": "icon-test1",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "8776692",
+      "name": "message",
+      "font_class": "icon-test2",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "8776706",
+      "name": "message_unread",
+      "font_class": "icon-test3",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "8776711",
+      "name": "record",
+      "font_class": "icon-test4",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "8776715",
+      "name": "time",
+      "font_class": "icon-test5",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "12477992",
+      "name": "Badminton Racket",
+      "font_class": "BadmintonRacket",
+      "unicode": "e931",
+      "unicode_decimal": 59697
+    },
+    {
+      "icon_id": "12477993",
+      "name": " Pills",
+      "font_class": "Pills",
+      "unicode": "e932",
+      "unicode_decimal": 59698
+    },
+    {
+      "icon_id": "12477996",
+      "name": "Baseball Bat",
+      "font_class": "BaseballBat",
+      "unicode": "e933",
+      "unicode_decimal": 59699
+    },
+    {
+      "icon_id": "12477997",
+      "name": "Badminton",
+      "font_class": "Badminton",
+      "unicode": "e934",
+      "unicode_decimal": 59700
+    },
+    {
+      "icon_id": "12477998",
+      "name": "Baseball Diamond",
+      "font_class": "BaseballDiamond",
+      "unicode": "e935",
+      "unicode_decimal": 59701
+    },
+    {
+      "icon_id": "12478001",
+      "name": "Baseball Hat",
+      "font_class": "BaseballHat",
+      "unicode": "e936",
+      "unicode_decimal": 59702
+    },
+    {
+      "icon_id": "12478002",
+      "name": "Baseball Jersey",
+      "font_class": "BaseballJersey",
+      "unicode": "e937",
+      "unicode_decimal": 59703
+    }
+  ]
+}
