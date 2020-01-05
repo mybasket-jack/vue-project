@@ -1,100 +1,80 @@
 <template>
 	<div class="form-wrapper">
-		<form-group :list="formList" :url="url"> </form-group>
+		<Button @click="handleSubmit" type="primary">提交</Button>
+		<Button @click="handleReset">重置</Button>
+		<form-single
+			ref="formSingle"
+			v-for="(item, index) in formList"
+			:key="`form_${index}`"
+			:config="item"
+			:value-data="valueData"
+			:rule-data="ruleData"
+			:error-store="errorStore"
+		></form-single>
 	</div>
 </template>
 <script>
 	import FormGroup from "_c/form-group/form-group";
+	import formData from "@/mock/response/form-data"
+	import FormSingle from '_c/form-single'
+	import {sendFormData} from "@/api/data";
+	import clonedeep from "clonedeep";
 	export default {
 		components: {
-			FormGroup
+			FormGroup,
+			FormSingle
 		},
 		data () {
 			return {
 				url: '/api/file/user/setFormData',
-				formList: [
-					{
-						name: 'name',
-						type: 'i-input',
-						value: '',
-						label: '姓名',
-						rule: [
-							{ required: true, message: 'The name cannot be empty', trigger: 'blur' }
-						]
-					},
-					{
-						name: 'range',
-						type: 'slider',
-						value: [ 10, 40],
-						range: true,
-						label: '范围'
-					},
-					{
-						name: 'sex',
-						type: 'i-select',
-						value: '',
-						label: '性别',
-						children: {
-							type: 'i-option',
-							list: [
-								{ value: 'woman', title: '女'},
-								{ value: 'man', title: '男'},
-							]
-						}
-					},
-					{
-						name: 'education',
-						type: 'radio-group',
-						value: 1,
-						label: '学历',
-						children: {
-							type: 'radio',
-							list: [
-								{ label: 1, title: '本科'},
-								{ label: 2, title: '研究生'},
-								{ label: 3, title: '博士'},
-							]
-						}
-					},
-					{
-						name: 'skill',
-						type: 'checkbox-group',
-						value: [],
-						label: '技能',
-						children: {
-							type: 'checkbox',
-							list: [
-								{ label: 1, title: 'Vue'},
-								{ label: 2, title: 'NodeJs'},
-								{ label: 3, title: 'Mysql'},
-							]
-						}
-					},
-					{
-						name: 'is-work',
-						type: 'i-switch',
-						value: true,
-						label: '是否在职'
-					},
-					{
-						name: 'start-time',
-						type: 'date-picker',
-						value: '',
-						placeholder:'请选择时间',
-						label: '开始时间'
-					},
-					{
-						name: 'submit',
-						type: 'i-button',
-						value: '',
-						icon: 'logo-facebook',
-						label: '提交'
-					}
-				]
+				formList:formData,
+				valueData: {},
+				ruleData: {},
+				errorStore: {},
+				initValueData: {}
 			}
 		},
 		methods: {
-			//
+			handleSubmit () {
+				let isValid = true;
+				this.$refs.formSingle.forEach(item => {
+					item.validate(valid => {
+						if (!valid) isValid = false;
+					})
+				});
+				if (isValid) {
+					sendFormData({
+						url: this.url,
+						data: this.valueData
+					}).then(res => {
+						this.$emit('on-submit-success',res);
+					}).catch(err => {
+						this.$emit('on-submit-error',err);
+						for (let key in err ) {
+							this.errorStore[key] = err[key];
+						}
+					})
+				}
+			},
+			handleReset () {
+				this.valueData = clonedeep(this.initValueData);
+			}
+		},
+		mounted () {
+			let valueData = {};
+			let ruleData = {};
+			let errorStore = {};
+			let initValueData = {};
+			formData.forEach(item => {
+				valueData[item.name] = item.value;
+				ruleData[item.name] = item.rule;
+				errorStore[item.name] = '';
+				initValueData[item.name] = item.value;
+			});
+			this.valueData = valueData;
+			this.ruleData = ruleData;
+			this.errorStore = errorStore;
+			this.initValueData = initValueData;
 		}
 	}
 </script>

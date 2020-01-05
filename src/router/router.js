@@ -49,6 +49,12 @@ export const routeMap = [
 			]
 		},
 		{
+			// 大数据性能优化
+			path: '/optimize',
+			name: 'optimize',
+			component: () => import('@/views/optimize')
+		},
+		{
 			// 树组件
 			path: '/tree',
 			name: 'tree',
