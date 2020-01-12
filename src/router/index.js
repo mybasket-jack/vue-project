@@ -7,6 +7,7 @@ import { setTitle, setToken, getToken} from '@/lib/util'
 Vue.use(VueRouter);
 
 const router = new VueRouter({
+	mode: 'history',
   routes
 });
 
@@ -33,7 +34,9 @@ router.beforeEach((to,from,next) => {
 
 	// 权限判断
 	const token = getToken();
+	debugger;
 	if (token) {
+		console.log(store.state.router.hasGetRules);
 		if(!store.state.router.hasGetRules){
 			// 没有获取过路由列表
 			store.dispatch("authorization").then( rules => {
@@ -47,10 +50,17 @@ router.beforeEach((to,from,next) => {
 				}).catch(() => {
 					next({name: 'login'})
 				});
+			}).catch( () => {
+				// 校验不成功登出
+				setToken('');
+				next({name: 'login'})
 			})
 		} else{
-			// 获取过路由列表
-			next()
+			// 再次登录即登出
+			if (to.name === 'login'){
+				setToken('');
+			}
+		 next();
 		}
 	} else {
 		if (to.name === 'login') next();

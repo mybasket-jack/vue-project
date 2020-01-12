@@ -33,15 +33,10 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-import {getUserInfo,login} from '@/api/user'
+import {getUserInfo} from '@/api/user'
 import {mapState,mapMutations} from 'vuex'
 export default {
   name: 'home',
-  // components: {
-  //   HelloWorld
-	// },
 	props: {
 		food: {
 			name: String,
@@ -83,7 +78,7 @@ export default {
 			else if (type === 'push') {
 				const name = 'jack'
 				this.$router.push({
-					path: `/argu/${name}`
+					path: `/params/${name}`
 					// name: 'argu',
 					// params: {
 					// 	name: 'jack'
@@ -103,11 +98,6 @@ export default {
 				this.SET_LOGIN_RESULT(res.data)
 				this.url = res.data.img
 				this.bgColor = res.data.bgColor
-			})
-		},
-		login () {
-			login({name: this.inputValue,password:'jack'}).then(res => {
-				this.SET_LOGIN_RESULT(res.data.result)
 			})
 		}
 	}

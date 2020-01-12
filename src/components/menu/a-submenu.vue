@@ -11,7 +11,7 @@
 </template>
 <script>
 	export default {
-		name: 'ASubMenu',
+		name: 'ASubmenu',
 		data () {
 			return {
 				showChild: false

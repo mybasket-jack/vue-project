@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import Router from 'vue-router'
 import store from './store'  //引入vuex
 import Bus from './lib/bus'
 import ViewUI from 'view-design'
@@ -14,9 +15,15 @@ import IconFont from '_c/icon-font'
 import IconSvg from '_c/icon-svg'
 
 import CountTo from '_c/count-to'
-if(process.env.NODE_ENV === 'development')  require('./mock');
+if(process.env.NODE_ENV !== 'production')  require('./mock');
 Vue.config.productionTip = false;
 Vue.prototype.$bus = Bus;
+
+// 处理NavigationDuplicated 问题
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+	return originalPush.call(this, location).catch(err => err);
+};
 
 // 全局注册组件
 Vue.component('icon-font',IconFont);

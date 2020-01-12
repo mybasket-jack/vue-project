@@ -29,7 +29,7 @@ const actions = {
 			login({userName, password }).then( res => {
 				if(res.code == 200 && res.data.token){
 					// 保存token
-					setToken(res.data.token)
+					setToken(res.data.token);
 					resolve()
 				} else {
 					reject(new Error('登录错误'))

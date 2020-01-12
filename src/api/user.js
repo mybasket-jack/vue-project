@@ -2,21 +2,21 @@ import axios from './index'
 import qs from 'qs'
 export const getUserInfo = () => {
 	return axios.request({
-		url: '/api/file/user',
+		url: '/index/getUserInfo',
 		method: 'get'
 	})
 }
 export const login = (param) => {
 	return axios.request({
-		url: '/api/file/user/login',
+		url: '/index/login',
 		method: 'post',
-		data: qs.stringify({param: JSON.stringify(param)})
+		data: param
 	})
 }
 
 export const authorization = () => {
 	return axios.request({
-		url: '/api/file/user/authorization',
+		url: '/users/authorization',
 		method: 'get'
 	})
 }

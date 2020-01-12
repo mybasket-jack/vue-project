@@ -4,16 +4,17 @@
 <!--      <router-link :to="{name: 'home'}">Home</router-link> |-->
 <!--      <router-link v-bind:to="{name: 'about'}">About</router-link>-->
 <!--    </div>-->
-		<router-view />
+<!--		<router-view />-->
 <!--		<transition-group name="router">-->
-<!--			<router-view key="default"/>-->
-<!--    	<router-view key="email" name="email"/>-->
-<!--			<router-view key="tel" name="tel"/>-->
+			<router-view key="default"/>
+    	<router-view key="email" name="email"/>
+			<router-view key="tel" name="tel"/>
 <!--		</transition-group>-->
 
   </div>
 </template>
 <script>
+	import { mapMutations } from 'vuex'
 	export default {
  	data () {
  		return {
@@ -21,10 +22,16 @@
  		}
  	},
 	watch: {
-		'$route': (to) => {
- 			to.query && to.query.transitionName && (this.routerTransition = to.query.transitionName)
- 		}
- 	}
+			// 监听路由的变化
+			'$route' (newRoute) {
+				this.UPDATE_ROUTER(newRoute);
+			}
+ 		},
+		methods: {
+			...mapMutations([
+				'UPDATE_ROUTER'
+			])
+		}
 	}
  </script>
 <style lang="less">

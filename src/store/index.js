@@ -6,6 +6,7 @@ import actions from './actions'
 import mutations from './mutations'
 import user from './modules/user'
 import router from './modules/router'
+import tabNav from "@/store/modules/tabNav";
 // import saveInLocal from './plugin/saveInLocal'
 
 // 加载Vuex
@@ -19,7 +20,8 @@ export default new Vuex.Store({
   actions,
   modules: {
 		user,
-		router
+		router,
+		tabNav
 	},
 	//plugins: [ saveInLocal ]
 })

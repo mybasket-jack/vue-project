@@ -49,6 +49,40 @@ export const getUserInfo = (options) => {
 		define: Random.fruit() // 自定义方法
 	}
 	return Mock.mock(template)
-}
+};
 
-
+export const authorization = () => {
+	return {
+		code: 200,
+		data: {
+			token: 'abcd',
+			rules: {
+				page: {
+					home: true,
+					home_index: true,
+					about: true,
+					component: true,
+					table_page: true,
+					folder_tree: true,
+					icon_page: true,
+					form_page: false,
+					optimize: true,
+					parent: true,
+					child: true,
+					name_view: true,
+					main: true,
+					store: true,
+					split_pane: true,
+					render_page: true,
+					menu_page: true,
+					login: true,
+				},
+				component: {
+					edit_button: true,
+					publish_button: false
+				}
+			}
+		},
+		mes: ''
+	}
+};

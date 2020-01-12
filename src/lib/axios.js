@@ -44,7 +44,7 @@ class HttpRequest {
 			return data
 		}, error => {
 			this.destory(url)
-			return Promise.reject(error)
+			return Promise.reject(error.response.data)
 		})
 	}
 	request (options) {
